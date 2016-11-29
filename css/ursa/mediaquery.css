@@ -134,7 +134,7 @@ body
     width: 125px !important;
   }
 
-  .ticketsummary
+  .ticket_summary
   {
     text-align: center;
     margin-left: 3.2em !important;
@@ -392,7 +392,7 @@ body
     width: 200px !important;
   }
 
-  .ticketsummary
+  .ticket_summary
   {
     text-align: center;
     margin-left: 7.75em !important;
@@ -649,7 +649,7 @@ body
   }
   
   /**tickets summary and round-div **/
-  .ticketsummary
+  .ticket_summary
   {
     margin-left: 12.25em !important;
     text-align: center !important;
@@ -812,7 +812,7 @@ font-size: 12px;
  
 
  
-
+/*******LAPTOPS LAPTOPS LAPTOPS LAPTOPS*********/
 
 /*MEDIUM devices up to Large Devices*/
 @media only screen and (min-width: 960px) and (max-width: 1599px) 
@@ -836,7 +836,7 @@ font-size: 12px;
 
 
 
-/**header.php**/
+/******HEADER.php******/
 
 /*search output*/
 #output
@@ -847,116 +847,17 @@ font-size: 12px;
 }
 
 /** END of header.php**/
+ 
+
   .boxcustomer
   {
     margin-top: 0em;
   }
 
-.boxsummary
-{
-   position: relative;
-   left: 10.45em !important;
-   
-}
-
-
-#sumArea
-{
-  margin-left: -2em;
-}
-
-.round-div
-  {
-   max-width: 45px;
-   max-height: 45px;
-   margin-right: 4.5em;
-   margin-left: 1.25em;
-   margin-top: 1.5em; 
-   
-  }
-
-
-/*START support.php*/
-
-.boxsummary2
-{
-  
-  position: relative;
-  top: 1.5em;
-
-  
- 
-}
-
-
-
-.mail_body
-{
-  max-width: 720px;
-}
-
-/*START support2.php*/
-
-
- 
-  #boxesSum, 
-  #boxesSup
-  
-  {
-  
-    margin-top: -5.25em;
-    margin-left: -3.5em;
-
-
-  }
-
-
-
-  
-
-  .boxsupport
-  {
-    margin-left: 7.25em !important;
-  }
-
-
- .ticketsummary2
-  {
-    
-     height: 500px;
-     width: 92% !important;
-     margin-left: -1.5em !important;
-     top: -3em;
-  }
-
-
-
 
 /**modal attachments**/
 
-#previewAtt
-{
- left: 4em;
- 
- background-color: rgba(0, 0, 0, 0.6);
 
-}
-
- #previewAtt img, #attfn
-  
-  {
-  
-  max-width: 960px;
-  max-height: 800px;
-  display: block; 
-  margin-top: 40px;
-  margin-left: -20px;
-  margin-right: auto;
-  width: 960px;
-  word-wrap: break-word !important;
- 
-  
-  }
 
   /**accounts form**/
 
@@ -968,19 +869,25 @@ font-size: 12px;
 
   /**register.php**/
 
-  .pagetitle
-  {
-    margin-left: 0.5em !important;
-  }
-
   /**account.php**/
-    .tab-content-account
-    {
-      margin-left: -1em !important;
-    }
+  .tab-content-account
+  {
+   margin-left: -1em !important;
+  }
 
 }
   
+
+
+
+
+
+
+
+
+
+
+
 
 
 @media only screen and (min-width: 1600px) and (max-width: 2040px) 
@@ -1085,7 +992,7 @@ font-size: 12px;
 
   }
 
-  .ticketsummary2
+  .ticket_support
   {
 
      height: 500px;
@@ -1113,28 +1020,7 @@ font-size: 12px;
 
 
 
-#previewAtt
 
-{
- left: 0em;
- background-color: rgba(0, 0, 0, 0.6);
-
-}
-
- #previewAtt img, #attfn
-  {
-  
-  max-width: 960px;
-  max-height: 900px;
-  display: block; 
-  margin-top: 40px;
-  margin-left: 0px;
-  margin-right: auto;
-  width: 720px;
-  word-wrap: break-word;
- 
-  
-  }
 
   /**register.php**/
   #business_information

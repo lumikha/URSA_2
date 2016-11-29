@@ -62,7 +62,7 @@
     <div class="full-width-div">
         <div class="container_12 boxcustomer">
             <div class="grid_12 push_2 omega " style="margin-top:0em;">
-                <div id="boxes" class="text-center" style="display:none;">
+                <div id="boxes" class="text-center boxes_pages" style="display:none;">
                     <div class="cust_id grid_2" style="padding: 1em;margin-right:3em;margin-left:0em;margin-bottom:1em;border: solid #052F6D 2px;">
                         <strong><?php echo $billing_sum; ?></strong>
                     </div>

@@ -60,10 +60,10 @@ table thead
 </style>
 
 
-<div class="full-width-div">
+
   <div class="container_12">
     <div class="grid_12 push_1 boxsupport">
-      <div id="boxesSup" class="row text-center">
+      <div id="boxesSup" class="row text-center boxes_pages">
        
         <a href="#unassigned" title="Unassigned Tickets" onclick="openFolder(1, <?=$unassigned?>, '#datatable_unassigned')" title="unassigned">
           <div class="grid_2 unassignedbutton" style="padding: 1em;margin-right:2.75em; margin-bottom:1em;border:solid #052F6D 2px;color:#A261B1;"  id="unassigned">
@@ -98,7 +98,7 @@ table thead
 
     <div class="container_12">
 
-    	<div class="grid_1 push_2 alpha ticketsummary2">
+    	<div class="grid_12 push_1 alpha ticket_support">
         <?php 
         function divChckBxs() {
             ?>
