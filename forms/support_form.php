@@ -1,0 +1,315 @@
+<style type="text/css">
+  
+a #unassigned:hover
+{
+  /*background-color: #A261B1 !important;*/
+  color: #052F6D !important;
+  text-decoration: underline;
+}
+
+
+a #mine:hover
+{
+  /*background-color: #EAE17F !important;*/
+  color: #052F6D !important;
+  text-decoration: underline;
+}
+
+
+a #assigned:hover
+{
+  /*background-color: #26B68E !important;*/
+  color: #052F6D !important;
+  text-decoration: underline;
+}
+
+
+a #closed:hover
+{
+  /*background-color: #323232 !important;*/
+  color: #052F6D !important;
+  text-decoration: underline;
+}
+
+
+a #spam:hover
+{
+  /*background-color: #C63C33 !important;*/
+  color: #052F6D !important;
+  text-decoration: underline;
+}
+
+table thead
+{
+  background-color: #052F6D;
+  color: #FFF;
+  
+}
+
+.dataTables_wrapper
+{
+  margin-top: -1em !important;
+  margin-top: -1em !important;
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.dataTables_scrollBody
+{
+    height: 300px !important;
+}
+</style>
+
+
+<div class="full-width-div">
+  <div class="container_12">
+    <div class="grid_12 push_1 boxsupport">
+      <div id="boxesSup" class="row text-center">
+       
+        <a href="#unassigned" title="Unassigned Tickets" onclick="openFolder(1, <?=$unassigned?>, '#datatable_unassigned')" title="unassigned">
+          <div class="grid_2 unassignedbutton" style="padding: 1em;margin-right:2.75em; margin-bottom:1em;border:solid #052F6D 2px;color:#A261B1;"  id="unassigned">
+            <i class="glyphicon glyphicon-envelope"></i> &nbsp<strong>Unassigned </strong>
+          </div>
+        </a>
+        <a href="#mine" title="Yours and yours alone" onclick="openFolder(2, <?=$mine?>, '#datatable_mine')" >
+          <div class="grid_2 minebutton" style="padding: 1em;margin-right:2.75em; margin-bottom:1em;border:solid #052F6D 2px;color:#EAE17F" id="mine">
+            <i class="glyphicon glyphicon-inbox"></i>&nbsp<strong>Mine </strong>
+          </div>
+        </a>
+        <a href="#assigned" title="Assigned Tickets"  onclick="openFolder(3, <?=$assigned?>, '#datatable_assigned')" >
+          <div class="grid_2 assignedbutton" style="padding: 1em;margin-right:2.75em; margin-bottom:1em;border:solid #052F6D 2px;color:#26B68E" id="assigned">
+            <i class="glyphicon glyphicon-user"></i>&nbsp<strong>Assigned </strong>
+          </div>
+        </a>
+        <a href="#closed" title="Closed. Settled.">
+          <div onclick="openFolder(4, <?=$closed?>, '#datatable_closed')" class="grid_2 closedbutton" style="padding: 1em;margin-right:2.75em; margin-bottom:1em;border:solid #052F6D 2px;color:#323232" id="closed">
+            <i class="glyphicon glyphicon-trash"></i>&nbsp<strong>Closed </strong>
+          </div>
+        </a>
+        <a href="#spam" title="Spam. Junk." >
+          <div onclick="openFolder(5, <?=$spam?>, '#datatable_spam')" class="grid_2 spambutton" style="padding: 1em;margin-right:2.78em; margin-bottom:1em;border:solid #052F6D 2px;color:#C63C33" id="spam">
+           <i class="glyphicon glyphicon-ban-circle"></i>&nbsp <strong>Spam </strong>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+<!--for the tickets-->
+
+    <div class="container_12">
+
+    	<div class="grid_1 push_2 alpha ticketsummary2">
+        <?php 
+        function divChckBxs() {
+            ?>
+                <ul class="btngrpChckBxs">
+                    <li class='btnAssignTo' onclick="checkedboxes()"><i class="glyphicon glyphicon-user"></i></li>
+                    <li class='btnStatus' onclick="checkedboxes()"><i class="glyphicon glyphicon-flag"></i></li>
+                    <li class='btnTag' onclick="checkedboxes()"><i class="glyphicon glyphicon-tag"></i></li>
+                    <span class="ttAssignTo">Assign</span>
+                    <span class="ttStatus">Status</span>
+                    <span class="ttTag">Tag</span>
+                </ul>
+            <?php
+        }
+    ?>
+
+    	 <div id="list_unassigned" class="">
+          <?php divChckBxs(); ?>             
+          <table id="datatable_unassigned" class="table">
+            <thead>
+              <tr>
+                <th><input type="checkbox" class="chckbx_all"></th>
+                <th title="Sort">Customer</th>
+                <th>Conversation</th>
+                <th title="Sort">Number</th>
+                <th title="Sort">Last Update</th>
+              </tr>
+            </thead>
+            <tbody>
+            <?php foreach($arr_unassigned as $aUN) { 
+                $body2 = htmlentities($aUN['body']);
+                if($aUN['notes']) {
+                    $th_arr_fin2 = "";
+                    $th_arr2 = array();
+                    foreach($aUN['notes'] as $nl2) {
+                        array_push($th_arr2, "<i><b>".$nl2['n_created_by']['S']."</b></i> added note||+||<span style='float: right;'>".$nl2['n_created_at']['S']."</span>||+||<p>".$nl2['n_content']['S']."</p>~^^^~");
+                    }
+
+                    $thArrCnt2 = 0;
+                    while(!empty($th_arr2[$thArrCnt2])) {
+                        $th_arr_fin2 .= $th_arr2[$thArrCnt2];
+                        $thArrCnt2++;
+                    }
+                } else {
+                    $th_arr_fin2 = "";
+                }
+
+                $ats_title2 = "";
+                $ats2 = "";
+                if($aUN['attachments']) {
+                    $ats_title2 = "<br/><b>Attachments</b><br/><br/>";
+                }
+                foreach($aUN['attachments'] as $am_ats2) {
+                    $ats2 .= htmlentities($am_ats2);
+                }
+                $em_cnt2=0;
+                while(!empty($em_check[$em_cnt2])) {
+                    if($aUN['email'] == $em_check[$em_cnt2]['email']) {
+                        $cID2 = $em_check[$em_cnt2]['id'];
+                        $datas = "data-cid='$cID2' data-id='".$aUN['ticket_id']."' data-no='".$aUN['no']."' data-name=\"".$aUN['from']."\" data-status='".$aUN['status']."' data-subject='".$aUN['subject']."' data-mes='$body2' data-atturl='$ats_title2.$ats2' data-threadmsg=\"$th_arr_fin2\"";
+                ?>
+
+              <tr>
+                <td><input type="checkbox" id="chckbxid<?=$aUN['no']?>" class="chckbx"></td>
+                <td class="open-modal" <?php echo $datas; ?>><?=$aUN['from']?></td>
+                <td class="open-modal" <?php echo $datas; ?>>
+                                            <div class="table_email_content">
+                                                <b><?=$aUN['subject']?></b><br/>
+                                                <?=str_replace("<br>",'',$aUN['body'])?>
+                                            </div>
+                                        </td>
+                                        <td class="open-modal" <?php echo $datas; ?>><?=$aUN['no']?></td>
+                                        <td class="open-modal" <?php echo $datas; ?>><?=$aUN['updated']?></td>
+                                    </tr>
+                                    <?php 
+                                     }
+                    $em_cnt2++;
+                }
+                                } ?>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div id="list_mine" class="folder_list_hide">
+                            <?php divChckBxs(); ?>
+                            <table id="datatable_mine" class="table">
+                                <thead>
+                                    <tr>
+                                        <th><input type="checkbox" class="chckbx_all"></th>
+                                        <th title="Sort">Customer</th>
+                                        <th>Conversation</th>
+                                        <th title="Sort">Number</th>
+                                        <th title="Sort">Last Update</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php foreach($arr_mine as $aM) { ?>
+                                    <tr>
+                                        <td><input type="checkbox" id="chckbxid<?=$aM['no']?>" class="chckbx"></td>
+                                        <td class="open-modal" <?php echo $datas; ?>><?=$aM['from']?></td>
+                                        <td class="open-modal" <?php echo $datas; ?>>
+                                            <div class="table_email_content">
+                                                <b><?=$aM['subject']?></b><br/>
+                                                <?=str_replace("<br>",'',$aM['body'])?>
+                                            </div>
+                                        </td>
+                                        <td class="open-modal" <?php echo $datas; ?>><?=$aM['no']?></td>
+                                        <td class="open-modal" <?php echo $datas; ?>><?=$aM['updated']?></td>
+                                    </tr>
+                                    <?php } ?>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div id="list_assigned" class="folder_list_hide">
+                            <?php divChckBxs(); ?>
+                            <table id="datatable_assigned" class="table">
+                                <thead>
+                                    <tr>
+                                        <th><input type="checkbox" class="chckbx_all"></th>
+                                        <th title="Sort">Customer</th>
+                                        <th>Conversation</th>
+                                        <th title="Sort">Assigned To</th>
+                                        <th title="Sort">Number</th>
+                                        <th title="Sort">Last Update</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php foreach($arr_assigned as $aAS) { ?>
+                                    <tr>
+                                        <td><input type="checkbox" id="chckbxid<?=$aAS['no']?>" class="chckbx"></td>
+                                        <td class="open-modal" <?php echo $datas; ?>><?=$aAS['from']?></td>
+                                        <td class="open-modal" <?php echo $datas; ?>>
+                                            <div class="table_email_content">
+                                                <b><?=$aAS['subject']?></b><br/>
+                                                <?=str_replace("<br>",'',$aAS['body'])?>
+                                            </div>
+                                        </td>
+                                        <td class="open-modal" <?php echo $datas; ?><?=$aAS['assigned']?></td>
+                                        <td class="open-modal" <?php echo $datas; ?>><?=$aAS['no']?></td>
+                                        <td class="open-modal" <?php echo $datas; ?>><?=$aAS['updated']?></td>
+                                    </tr>
+                                    <?php } ?>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div id="list_closed" class="folder_list_hide">
+                            <?php divChckBxs(); ?>
+                            <table id="datatable_closed" class="table">
+                                <thead>
+                                    <tr>
+                                        <th><input type="checkbox" class="chckbx_all"></th>
+                                        <th title="Sort">Customer</th>
+                                        <th>Conversation</th>
+                                        <th title="Sort">Number</th>
+                                        <th title="Sort">Last Update</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php foreach($arr_closed as $aC) { ?>
+                                    <tr>
+                                        <td><input type="checkbox" id="chckbxid<?=$aC['no']?>" class="chckbx"></td>
+                                        <td class="open-modal" <?php echo $datas; ?>><?=$aC['from']?></td>
+                                        <td class="open-modal" <?php echo $datas; ?>>
+                                            <div class="table_email_content">
+                                                <b><?=$aC['subject']?></b><br/>
+                                                <?=str_replace("<br>",'',$aC['body'])?>
+                                            </div>
+                                        </td>
+                                        <td class="open-modal" <?php echo $datas; ?>><?=$aC['no']?></td>
+                                        <td class="open-modal" <?php echo $datas; ?>><?=$aC['updated']?></td>
+                                    </tr>
+                                    <?php } ?>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div id="list_spam" class="folder_list_hide">
+                            <?php divChckBxs(); ?>
+                            <table id="datatable_spam" class="table">
+                                <thead>
+                                    <tr>
+                                        <th><input type="checkbox" class="chckbx_all"></th>
+                                        <th title="Sort">Customer</th>
+                                        <th>Conversation</th>
+                                        <th title="Sort">Number</th>
+                                        <th title="Sort">Last Update</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php foreach($arr_spam as $aS) { ?>
+                                    <tr>
+                                        <td><input type="checkbox" id="chckbxid<?=$aS['no']?>" class="chckbx"></td>
+                                        <td class="open-modal" <?php echo $datas; ?>><?=$aS['from']?></td>
+                                        <td class="open-modal" <?php echo $datas; ?>>
+                                            <div class="table_email_content">
+                                                <b><?=$aS['subject']?></b><br/>
+                                                <?=str_replace("<br>",'',$aS['body'])?>
+                                            </div>
+                                        </td>
+                                        <td class="open-modal" <?php echo $datas; ?>><?=$aS['no']?></td>
+                                        <td class="open-modal" <?php echo $datas; ?>><?=$aS['updated']?></td>
+                                    </tr>
+                                    <?php } ?>
+                                </tbody>
+                            </table>
+                        </div>
+
+
+    	</div>
+
+
+    </div>
+
+
+
+
+</div>
